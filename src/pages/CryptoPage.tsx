@@ -70,7 +70,7 @@ const CryptoPage = () => {
           ))
         )}
         
-        {Object.values(crypto.data).map(cryptoData => (
+        {Object.values(crypto.data).map((cryptoData) => (
           <CryptoCard key={cryptoData.id} cryptoData={cryptoData} />
         ))}
         

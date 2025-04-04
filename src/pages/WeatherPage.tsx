@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/store';
-import { fetchAllWeather } from '@/store/weatherSlice';
+import { fetchAllWeather, WeatherData } from '@/store/weatherSlice';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import WeatherCard from '@/components/weather/WeatherCard';
 import { Card, CardContent } from '@/components/ui/card';
@@ -61,7 +61,7 @@ const WeatherPage = () => {
           ))
         )}
         
-        {Object.values(weather.data).map(cityData => (
+        {Object.values(weather.data).map((cityData: WeatherData) => (
           <WeatherCard key={cityData.cityId} weatherData={cityData} />
         ))}
         

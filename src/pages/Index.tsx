@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/store';
-import { fetchAllWeather } from '@/store/weatherSlice';
-import { fetchAllCryptos } from '@/store/cryptoSlice';
+import { fetchAllWeather, WeatherData } from '@/store/weatherSlice';
+import { fetchAllCryptos, CryptoData } from '@/store/cryptoSlice';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import WeatherCard from '@/components/weather/WeatherCard';
 import CryptoCard from '@/components/crypto/CryptoCard';
@@ -14,6 +14,16 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { RefreshCw } from 'lucide-react';
 
+interface NewsItem {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  source: string;
+  publishedAt: string;
+  imageUrl?: string;
+}
+
 const Index = () => {
   const dispatch = useDispatch<AppDispatch>();
   const weather = useSelector((state: RootState) => state.weather);
@@ -21,7 +31,7 @@ const Index = () => {
   const refreshInterval = useSelector((state: RootState) => state.preferences.refreshInterval);
   
   const [loading, setLoading] = useState(true);
-  const [newsItems, setNewsItems] = useState([
+  const [newsItems, setNewsItems] = useState<NewsItem[]>([
     {
       id: '1',
       title: 'Bitcoin Surpasses $45,000 as Institutional Interest Grows',
@@ -149,7 +159,7 @@ const Index = () => {
           ))
         )}
         
-        {Object.values(weather.data).map(cityData => (
+        {Object.values(weather.data).map((cityData: WeatherData) => (
           <WeatherCard key={cityData.cityId} weatherData={cityData} />
         ))}
       </div>
@@ -172,7 +182,7 @@ const Index = () => {
           ))
         )}
         
-        {Object.values(crypto.data).map(cryptoData => (
+        {Object.values(crypto.data).map((cryptoData: CryptoData) => (
           <CryptoCard key={cryptoData.id} cryptoData={cryptoData} />
         ))}
       </div>
