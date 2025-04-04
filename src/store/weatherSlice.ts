@@ -32,7 +32,7 @@ interface WeatherState {
 
 const initialState: WeatherState = {
   data: {},
-  selectedCities: ['2643743', '5128581', '1850147'], // London, New York, Tokyo
+  selectedCities: ['2643743', '5128581', '1850147', '1275339'], // London, New York, Tokyo, Mumbai
   loading: false,
   error: null,
   lastUpdated: null,
@@ -91,6 +91,23 @@ const fetchWeatherData = async (cityId: string) => {
         { date: Date.now() + 86400000, temp: 27.8, description: 'Cloudy', icon: '03d' },
         { date: Date.now() + 172800000, temp: 29.1, description: 'Clear', icon: '01d' },
         { date: Date.now() + 259200000, temp: 30.2, description: 'Clear', icon: '01d' },
+      ]
+    },
+    '1275339': {
+      cityId: '1275339',
+      cityName: 'Mumbai',
+      country: 'IN',
+      temp: 32.4,
+      feelsLike: 35.8,
+      humidity: 80,
+      windSpeed: 3.5,
+      description: 'Partly cloudy',
+      icon: '02d',
+      timestamp: Date.now(),
+      forecast: [
+        { date: Date.now() + 86400000, temp: 33.1, description: 'Cloudy', icon: '03d' },
+        { date: Date.now() + 172800000, temp: 31.7, description: 'Rain', icon: '10d' },
+        { date: Date.now() + 259200000, temp: 30.9, description: 'Thunderstorm', icon: '11d' },
       ]
     },
   };
