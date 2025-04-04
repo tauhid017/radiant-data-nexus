@@ -1,17 +1,14 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Bell, Menu, Moon, Sun } from 'lucide-react';
+import { Menu, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Toggle } from '@/components/ui/toggle';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { setTheme } from '@/store/preferencesSlice';
-import NotificationsDropdown from '../notifications/NotificationsDropdown';
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
-  const [showNotifications, setShowNotifications] = React.useState(false);
   const dispatch = useDispatch();
   const { theme } = useSelector((state: RootState) => state.preferences);
   
@@ -69,19 +66,6 @@ const Navbar = () => {
                 <Moon className="h-5 w-5" />
               )}
             </Button>
-            
-            <div className="relative">
-              <Button 
-                variant="ghost" 
-                size="icon"
-                onClick={() => setShowNotifications(!showNotifications)}
-              >
-                <Bell className="h-5 w-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
-              </Button>
-              
-              {showNotifications && <NotificationsDropdown />}
-            </div>
           </div>
         </div>
       </div>
