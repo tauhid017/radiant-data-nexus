@@ -1,13 +1,38 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Bell, Menu } from 'lucide-react';
+import { Bell, Menu, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Toggle } from '@/components/ui/toggle';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { setTheme } from '@/store/preferencesSlice';
 import NotificationsDropdown from '../notifications/NotificationsDropdown';
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
   const [showNotifications, setShowNotifications] = React.useState(false);
+  const dispatch = useDispatch();
+  const { theme } = useSelector((state: RootState) => state.preferences);
+  
+  // Apply theme class to document when theme changes
+  React.useEffect(() => {
+    const root = window.document.documentElement;
+    
+    root.classList.remove('light', 'dark');
+    
+    if (theme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.classList.add(systemTheme);
+    } else {
+      root.classList.add(theme);
+    }
+  }, [theme]);
+  
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    dispatch(setTheme(newTheme));
+  };
   
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
@@ -32,6 +57,19 @@ const Navbar = () => {
           </div>
           
           <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </Button>
+            
             <div className="relative">
               <Button 
                 variant="ghost" 

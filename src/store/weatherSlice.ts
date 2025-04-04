@@ -1,4 +1,3 @@
-
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 export interface WeatherData {
@@ -32,7 +31,7 @@ interface WeatherState {
 
 const initialState: WeatherState = {
   data: {},
-  selectedCities: ['2643743', '5128581', '1850147', '1275339'], // London, New York, Tokyo, Mumbai
+  selectedCities: ['2643743', '5128581', '1275339'], // London, New York, Mumbai
   loading: false,
   error: null,
   lastUpdated: null,
@@ -74,23 +73,6 @@ const fetchWeatherData = async (cityId: string) => {
         { date: Date.now() + 86400000, temp: 24.2, description: 'Sunny', icon: '01d' },
         { date: Date.now() + 172800000, temp: 23.9, description: 'Partly cloudy', icon: '02d' },
         { date: Date.now() + 259200000, temp: 21.5, description: 'Rain', icon: '10d' },
-      ]
-    },
-    '1850147': {
-      cityId: '1850147',
-      cityName: 'Tokyo',
-      country: 'JP',
-      temp: 28.6,
-      feelsLike: 30.2,
-      humidity: 74,
-      windSpeed: 2.4,
-      description: 'Clear',
-      icon: '01d',
-      timestamp: Date.now(),
-      forecast: [
-        { date: Date.now() + 86400000, temp: 27.8, description: 'Cloudy', icon: '03d' },
-        { date: Date.now() + 172800000, temp: 29.1, description: 'Clear', icon: '01d' },
-        { date: Date.now() + 259200000, temp: 30.2, description: 'Clear', icon: '01d' },
       ]
     },
     '1275339': {
